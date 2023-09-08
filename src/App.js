@@ -1,12 +1,12 @@
 import './App.css';
 import Header from './Header'
-import DisplayProblem from './DisplayProblem'
+import MathExerciseContainer from './MathExerciseContainer'
 
 function App() {
   return (
     <div className="App">
-      <Header className="App-header"></Header>
-      <DisplayProblem></DisplayProblem>
+      <Header className="App-header" />
+      <MathExerciseContainer />
     </div>
   );
 }
