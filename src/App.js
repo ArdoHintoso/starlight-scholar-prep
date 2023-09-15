@@ -1,6 +1,6 @@
-import './App.css';
-import Header from './Header'
-import MathExerciseContainer from './MathExerciseContainer'
+import "./App.css";
+import Header from "./Header";
+import MathExerciseContainer from "./MathExerciseContainer";
 
 function App() {
   return (
