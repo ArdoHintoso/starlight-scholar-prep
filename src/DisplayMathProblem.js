@@ -2,7 +2,9 @@ const DisplayMathProblem = ({
   totalCount,
   totalQuestions,
   x,
+  operator,
   y,
+  operandsAndOperators,
   handleClick,
 }) => {
   if (totalCount === totalQuestions - 1) {
@@ -10,7 +12,8 @@ const DisplayMathProblem = ({
       <div>
         <h2>
           {" "}
-          {x} + {y} = <input id="UserInput"></input>
+          {operandsAndOperators[operator].templateLiteral(x, y)}{" "}
+          <input id="UserInput"></input>
           <button onClick={handleClick}>All Done!</button>
         </h2>
         <h3> {`Questions Attempted: ${totalCount}/${totalQuestions}`}</h3>
@@ -22,7 +25,8 @@ const DisplayMathProblem = ({
     <div>
       <h2>
         {" "}
-        {x} + {y} = <input id="UserInput"></input>
+        {operandsAndOperators[operator].templateLiteral(x, y)}{" "}
+        <input id="UserInput"></input>
         <button onClick={handleClick}>Next Question</button>
       </h2>
       <h3> {`Questions Attempted: ${totalCount}/${totalQuestions}`}</h3>

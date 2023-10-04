@@ -1,8 +1,8 @@
-const DisplayMathResults = ({ accuracy, answerLog }) => {
+const DisplayMathResults = ({ answerLog }) => {
   return (
     <div>
-      <h2> {`Worksheet Complete! Accuracy: ${accuracy * 100}%`} </h2>
-      <h2>Let's Review Your...</h2>
+      <h2> {`Worksheet Complete! Accuracy: ${answerLog.accuracy * 100}%`} </h2>
+      <h2>Let&apos;s Review Your...</h2>
       <h3>Correct Answers</h3>
       <ul>
         {answerLog["correct"].map((x) => (
