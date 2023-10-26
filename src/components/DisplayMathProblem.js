@@ -28,7 +28,7 @@ const DisplayMathProblem = ({
         answer: parseInt(answer),
         statement: operandsAndOperators[operator].templateLiteral(x, y),
         qNum: totalCount + 1,
-        correct: checkerFn(x, y, parseInt(answer)),
+        correct: checkerFn(x, operator, y, parseInt(answer)),
       };
       const response = await fetch("http://localhost:5000/worksheet", {
         method: "POST",
@@ -93,14 +93,14 @@ const DisplayMathProblem = ({
       </form>
       <Text height="50px">
         {" "}
-        {`Questions Attempted: ${totalCount}/${totalQuestions}`}
+        {`Questions Attempted: ${totalCount} out of ${totalQuestions}`}
       </Text>
       <Progress
         colorScheme="pink"
         value={(totalCount / totalQuestions) * 100}
       />
       <Text height="30px" />
-      <CompletedMathProblems completed={completed} />
+      <CompletedMathProblems completed={completed} checkerFn={checkerFn} />
     </div>
   );
 };

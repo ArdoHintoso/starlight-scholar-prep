@@ -14,11 +14,22 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-const updateAnswer = async (e, currentID, latestAnswer) => {
+const updateAnswer = async (
+  e,
+  currentID,
+  latestAnswer,
+  x,
+  currentOperator,
+  y,
+  checkerFn,
+) => {
   e.preventDefault();
 
   try {
-    const body = { latestAnswer };
+    const body = {
+      latestAnswer,
+      correct: checkerFn(x, currentOperator, y, parseInt(latestAnswer)),
+    };
     const response = await fetch(
       `http://localhost:5000/worksheet/${currentID}`,
       {
@@ -33,9 +44,12 @@ const updateAnswer = async (e, currentID, latestAnswer) => {
   }
 };
 
-const MathProblemCard = ({ problem }) => {
+const MathProblemCard = ({ problem, checkerFn }) => {
   const [latestAnswer, changeAnswer] = useState(problem.answer);
   const currentID = problem.q_id;
+  const x = problem.operand1;
+  const y = problem.operand2;
+  const currentOperator = problem.operator;
 
   return (
     <Card align="center">
@@ -53,7 +67,19 @@ const MathProblemCard = ({ problem }) => {
         </Editable>
       </CardBody>
       <CardFooter>
-        <Button onClick={(e) => updateAnswer(e, currentID, latestAnswer)}>
+        <Button
+          onClick={(e) =>
+            updateAnswer(
+              e,
+              currentID,
+              latestAnswer,
+              x,
+              currentOperator,
+              y,
+              checkerFn,
+            )
+          }
+        >
           Update Answer
         </Button>
       </CardFooter>

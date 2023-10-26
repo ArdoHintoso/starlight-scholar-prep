@@ -49,11 +49,11 @@ app.get("/worksheet", async (req, res) => {
 app.put("/worksheet/:q_id", async (req, res) => {
   try {
     const { q_id } = req.params;
-    const { latestAnswer } = req.body;
+    const { latestAnswer, correct } = req.body;
     // eslint-disable-next-line no-unused-vars
     const updateAns = await pool.query(
-      "UPDATE worksheet2 SET answer = $1 WHERE q_id = $2",
-      [latestAnswer, q_id],
+      "UPDATE worksheet2 SET answer = $1, correct =$2 WHERE q_id = $3",
+      [latestAnswer, correct, q_id],
     );
 
     res.json(`${q_id} was updated`);
