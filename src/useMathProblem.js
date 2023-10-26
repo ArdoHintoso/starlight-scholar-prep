@@ -1,114 +1,99 @@
 import { useState } from "react";
+import operandsAndOperators from "./mathOperations";
 
 const useMathProblem = (
   xStart,
   yStart,
-  currentCorrect,
+  // currentCorrect,
   currentCount,
   totalQuestions,
 ) => {
   let xRange = xStart;
-  const operandsAndOperators = {
-    addition: {
-      expression: (x, y) => x + y,
-      templateLiteral: (x, y) => `${x}+${y}=`,
-      fullEquation: (x, y, userInput) => `${x}+${y}=${userInput}`,
-    },
-    subtraction: {
-      expression: (x, y) => x - y,
-      templateLiteral: (x, y) => `${x}-${y}=`,
-      fullEquation: (x, y, userInput) => `${x}-${y}=${userInput}`,
-    },
-    multiplication: {
-      expression: (x, y) => x * y,
-      templateLiteral: (x, y) => `${x}*${y}=`,
-      fullEquation: (x, y, userInput) => `${x}*${y}=${userInput}`,
-    },
-    division: {
-      expression: (x, y) => x / y,
-      templateLiteral: (x, y) => `${x}/${y}=`,
-      fullEquation: (x, y, userInput) => `${x}/${y}=${userInput}`,
-    },
-  };
+
   let operator =
     Object.keys(operandsAndOperators)[
       Math.floor(Math.random() * Object.keys(operandsAndOperators).length)
     ];
-  let [correctCount, setCorrectCount] = useState(currentCorrect);
+  // let [correctCount, setCorrectCount] = useState(currentCorrect);
   let [totalCount, setTotalCount] = useState(currentCount);
-  const [yRange, setYrange] = useState(yStart);
-  const [answerLog, updateLog] = useState({
-    problems: [],
-    correct: [],
-    incorrect: [],
-    accuracy: 0.0,
-  });
+  const [lastQuestion, updateLast] = useState("");
+  const [completed, setCompleted] = useState([]);
+  // const [yRange, setYrange] = useState(yStart);
+  // const [answerLog, updateLog] = useState({
+  //   problems: [],
+  //   correct: [],
+  //   incorrect: [],
+  //   accuracy: 0.0,
+  // });
 
   const genVal = function (range) {
     return Math.floor(Math.random() * range) + 1;
   };
 
   let x = genVal(xRange);
-  let y = genVal(yRange);
+  let y = genVal(yStart);
 
   // to prevent the same question from being asked again back-to-back:
   while (
-    operandsAndOperators[operator].templateLiteral(x, y) ===
-    answerLog.problems[answerLog.problems.length - 1]
+    operandsAndOperators[operator].templateLiteral(x, y) === lastQuestion
   ) {
     x = genVal(xRange);
-    y = genVal(yRange);
+    y = genVal(yStart);
   }
 
   const checkerFn = function (x, y, usrInput) {
-    if (Number(usrInput) === operandsAndOperators[operator].expression(x, y)) {
-      correctCount++;
-      setCorrectCount(correctCount);
-      if (totalCount >= 10 && answerLog.accuracy >= 0.8) {
-        setYrange(yRange + 1);
-      }
-      return true;
-    }
+    return Number(usrInput) === operandsAndOperators[operator].expression(x, y)
+      ? true
+      : false;
+    // correctCount++;
+    // setCorrectCount(correctCount);
+    // if (totalCount >= 10 && answerLog.accuracy >= 0.8) {
+    //   setYrange(yRange + 1);
+    // }
   };
 
   const handleClick = () => {
-    let userInput = document.getElementById("UserInput").value;
+    // let userInput = document.getElementById("UserInput").value;
+
+    updateLast(operandsAndOperators[operator].templateLiteral(x, y));
     totalCount++;
     setTotalCount(totalCount);
 
-    if (checkerFn(x, y, userInput)) {
-      console.log(`nice, that's correct`);
-      answerLog["correct"].push(
-        operandsAndOperators[operator].fullEquation(x, y, userInput),
-      );
-    } else if (yRange > 1) {
-      setYrange(yRange - 1);
-      answerLog["incorrect"].push(
-        operandsAndOperators[operator].fullEquation(x, y, userInput),
-      );
-    } else {
-      answerLog["incorrect"].push(
-        operandsAndOperators[operator].fullEquation(x, y, userInput),
-      );
-    }
+    // if (checkerFn(x, y, userInput)) {
+    //   console.log(`nice, that's correct`);
+    //   answerLog["correct"].push(
+    //     operandsAndOperators[operator].fullEquation(x, y, userInput),
+    //   );
+    // } else if (yRange > 1) {
+    //   setYrange(yRange - 1);
+    //   answerLog["incorrect"].push(
+    //     operandsAndOperators[operator].fullEquation(x, y, userInput),
+    //   );
+    // } else {
+    //   answerLog["incorrect"].push(
+    //     operandsAndOperators[operator].fullEquation(x, y, userInput),
+    //   );
+    // }
 
-    answerLog["problems"].push(
-      operandsAndOperators[operator].templateLiteral(x, y),
-    );
-    answerLog.accuracy = correctCount / totalCount;
-    updateLog(answerLog);
-    console.log(answerLog);
+    // answerLog["problems"].push(
+    //   operandsAndOperators[operator].templateLiteral(x, y),
+    // );
+    // answerLog.accuracy = correctCount / totalCount;
+    // updateLog(answerLog);
+    // console.log(answerLog);
   };
 
   return [
     x,
     operator,
     y,
-    operandsAndOperators,
     totalCount,
-    handleClick,
     totalQuestions,
-    answerLog,
+    operandsAndOperators,
+    completed,
+    checkerFn,
+    setCompleted,
+    handleClick,
   ];
 };
 

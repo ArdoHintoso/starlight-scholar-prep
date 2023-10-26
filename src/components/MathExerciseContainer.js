@@ -1,4 +1,4 @@
-import useMathProblem from "./useMathProblem";
+import useMathProblem from "../useMathProblem";
 import DisplayMathProblem from "./DisplayMathProblem";
 import DisplayMathResults from "./DisplayMathResults";
 
@@ -7,12 +7,14 @@ const MathExerciseContainer = () => {
     x,
     operator,
     y,
-    operandsAndOperators,
     totalCount,
-    handleClick,
     totalQuestions,
-    answerLog,
-  ] = useMathProblem(10, 1, 0, 0, 20);
+    operandsAndOperators,
+    completed,
+    checkerFn,
+    setCompleted,
+    handleClick,
+  ] = useMathProblem(10, 1, 0, 10);
 
   return totalCount < totalQuestions ? (
     <DisplayMathProblem
@@ -22,10 +24,13 @@ const MathExerciseContainer = () => {
       operator={operator}
       y={y}
       operandsAndOperators={operandsAndOperators}
+      completed={completed}
+      checkerFn={checkerFn}
+      setCompleted={setCompleted}
       handleClick={handleClick}
     />
   ) : (
-    <DisplayMathResults answerLog={answerLog} />
+    <DisplayMathResults completed={completed} />
   );
 };
 
