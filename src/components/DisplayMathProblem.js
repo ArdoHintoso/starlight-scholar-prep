@@ -10,12 +10,11 @@ const DisplayMathProblem = ({
   operator,
   y,
   operandsAndOperators,
-  completed,
   checkerFn,
-  setCompleted,
   handleClick,
 }) => {
   const [answer, setAnswer] = useState("");
+  const [completed, setCompleted] = useState([]);
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
@@ -100,7 +99,11 @@ const DisplayMathProblem = ({
         value={(totalCount / totalQuestions) * 100}
       />
       <Text height="30px" />
-      <CompletedMathProblems completed={completed} checkerFn={checkerFn} />
+      <CompletedMathProblems
+        completed={completed}
+        checkerFn={checkerFn}
+        getCompleted={getCompleted}
+      />
     </div>
   );
 };

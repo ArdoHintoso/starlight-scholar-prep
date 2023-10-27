@@ -21,6 +21,7 @@ const updateAnswer = async (
   x,
   currentOperator,
   y,
+  getCompleted,
   checkerFn,
 ) => {
   e.preventDefault();
@@ -39,12 +40,14 @@ const updateAnswer = async (
       },
     );
     console.log(response);
+
+    getCompleted();
   } catch (error) {
     console.error(error.message);
   }
 };
 
-const MathProblemCard = ({ problem, checkerFn }) => {
+const MathProblemCard = ({ problem, checkerFn, getCompleted }) => {
   const [latestAnswer, changeAnswer] = useState(problem.answer);
   const currentID = problem.q_id;
   const x = problem.operand1;
@@ -52,7 +55,7 @@ const MathProblemCard = ({ problem, checkerFn }) => {
   const currentOperator = problem.operator;
 
   return (
-    <Card align="center">
+    <Card align="center" color={problem.correct ? "green" : "red"}>
       <CardHeader>
         <Heading size="md">Question #{problem.q_num}</Heading>
       </CardHeader>
@@ -76,6 +79,7 @@ const MathProblemCard = ({ problem, checkerFn }) => {
               x,
               currentOperator,
               y,
+              getCompleted,
               checkerFn,
             )
           }

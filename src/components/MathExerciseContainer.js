@@ -10,9 +10,7 @@ const MathExerciseContainer = () => {
     totalCount,
     totalQuestions,
     operandsAndOperators,
-    completed,
     checkerFn,
-    setCompleted,
     handleClick,
   ] = useMathProblem(10, 1, 0, 10);
 
@@ -24,13 +22,11 @@ const MathExerciseContainer = () => {
       operator={operator}
       y={y}
       operandsAndOperators={operandsAndOperators}
-      completed={completed}
       checkerFn={checkerFn}
-      setCompleted={setCompleted}
       handleClick={handleClick}
     />
   ) : (
-    <DisplayMathResults completed={completed} />
+    <DisplayMathResults />
   );
 };
 

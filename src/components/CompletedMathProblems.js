@@ -1,7 +1,7 @@
 import MathProblemCard from "./MathProblemCard";
 import { SimpleGrid } from "@chakra-ui/react";
 
-const CompletedMathProblems = ({ completed, checkerFn }) => {
+const CompletedMathProblems = ({ completed, checkerFn, getCompleted }) => {
   return (
     <SimpleGrid
       spacing={10}
@@ -13,6 +13,7 @@ const CompletedMathProblems = ({ completed, checkerFn }) => {
             key={eachQuestion.q_id}
             problem={eachQuestion}
             checkerFn={checkerFn}
+            getCompleted={getCompleted}
           />
         );
       })}

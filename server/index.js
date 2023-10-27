@@ -45,6 +45,17 @@ app.get("/worksheet", async (req, res) => {
   }
 });
 
+app.get("/mathResults", async (req, res) => {
+  try {
+    const allCompleted = await pool.query(
+      "SELECT * FROM worksheet2 ORDER BY q_id ASC",
+    );
+    res.json(allCompleted.rows);
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
 //// update
 app.put("/worksheet/:q_id", async (req, res) => {
   try {

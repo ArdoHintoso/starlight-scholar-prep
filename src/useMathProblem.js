@@ -10,7 +10,6 @@ const useMathProblem = (xStart, yStart, currentCount, totalQuestions) => {
     ];
   let [totalCount, setTotalCount] = useState(currentCount);
   const [lastQuestion, updateLast] = useState("");
-  const [completed, setCompleted] = useState([]);
 
   const genVal = function (range) {
     return Math.floor(Math.random() * range) + 1;
@@ -46,9 +45,7 @@ const useMathProblem = (xStart, yStart, currentCount, totalQuestions) => {
     totalCount,
     totalQuestions,
     operandsAndOperators,
-    completed,
     checkerFn,
-    setCompleted,
     handleClick,
   ];
 };
