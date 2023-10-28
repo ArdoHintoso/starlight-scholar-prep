@@ -12,6 +12,7 @@ import {
   Heading,
   Input,
   Text,
+  useBoolean,
 } from "@chakra-ui/react";
 
 const updateAnswer = async (
@@ -47,8 +48,9 @@ const updateAnswer = async (
   }
 };
 
-const MathProblemCard = ({ problem, checkerFn, getCompleted }) => {
+const MathProblemCard = ({ problem, checkerFn, getCompleted, summaryPage }) => {
   const [latestAnswer, changeAnswer] = useState(problem.answer);
+  const [flag, setFlag] = useBoolean();
   const currentID = problem.q_id;
   const x = problem.operand1;
   const y = problem.operand2;
@@ -70,22 +72,28 @@ const MathProblemCard = ({ problem, checkerFn, getCompleted }) => {
         </Editable>
       </CardBody>
       <CardFooter>
-        <Button
-          onClick={(e) =>
-            updateAnswer(
-              e,
-              currentID,
-              latestAnswer,
-              x,
-              currentOperator,
-              y,
-              getCompleted,
-              checkerFn,
-            )
-          }
-        >
-          Update Answer
-        </Button>
+        {summaryPage ? (
+          <Text />
+        ) : (
+          <Button
+            onMouseEnter={setFlag.on}
+            onMouseLeave={setFlag.off}
+            onClick={(e) =>
+              updateAnswer(
+                e,
+                currentID,
+                latestAnswer,
+                x,
+                currentOperator,
+                y,
+                getCompleted,
+                checkerFn,
+              )
+            }
+          >
+            {flag ? "Are you Sure?" : "Update Answer!"}
+          </Button>
+        )}
       </CardFooter>
     </Card>
   );

@@ -28,7 +28,7 @@ const DisplayMathResults = () => {
         {" "}
         Accuracy: {(correctSum / completed.length) * 100}%{" "}
       </Text>
-      <CompletedMathProblems completed={completed} />
+      <CompletedMathProblems completed={completed} summaryPage={true} />
     </div>
   );
 };

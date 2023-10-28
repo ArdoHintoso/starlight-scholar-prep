@@ -101,6 +101,7 @@ const DisplayMathProblem = ({
       <Text height="30px" />
       <CompletedMathProblems
         completed={completed}
+        summaryPage={false}
         checkerFn={checkerFn}
         getCompleted={getCompleted}
       />
