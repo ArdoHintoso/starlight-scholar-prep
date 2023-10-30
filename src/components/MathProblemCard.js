@@ -57,11 +57,16 @@ const MathProblemCard = ({ problem, checkerFn, getCompleted, summaryPage }) => {
   const currentOperator = problem.operator;
 
   return (
-    <Card align="center" color={problem.correct ? "green" : "red"}>
+    <Card
+      align="center"
+      backgroundColor={
+        summaryPage ? (problem.correct ? "green" : "red") : "white"
+      }
+    >
       <CardHeader>
         <Heading size="md">Question #{problem.q_num}</Heading>
       </CardHeader>
-      <CardBody>
+      <CardBody color="black">
         <Text fontSize="2xl">{problem.statement}</Text>
         <Editable defaultValue={latestAnswer || null} fontSize="4xl" as="b">
           <EditablePreview />
