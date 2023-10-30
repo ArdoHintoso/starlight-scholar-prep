@@ -68,8 +68,12 @@ const MathProblemCard = ({ problem, checkerFn, getCompleted, summaryPage }) => {
       </CardHeader>
       <CardBody color="black">
         <Text fontSize="2xl">{problem.statement}</Text>
-        <Editable defaultValue={latestAnswer || null} fontSize="4xl" as="b">
-          <EditablePreview />
+        <Editable
+          defaultValue={String(latestAnswer) || null}
+          fontSize="4xl"
+          as="b"
+        >
+          <EditablePreview minWidth="2px" py={2} px={4} />
           <Input
             as={EditableInput}
             onChange={(e) => changeAnswer(e.target.value)}
