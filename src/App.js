@@ -1,5 +1,6 @@
 import "./App.css";
 import Header from "./Header";
+import HomePage from "./HomePage";
 import MathExerciseContainer from "./components/MathExerciseContainer";
 import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -13,6 +14,7 @@ function App() {
         </div>
         <Routes>
           <Route path="/worksheet" element={<MathExerciseContainer />} />
+          <Route path="/" element={<HomePage />} />
         </Routes>
       </BrowserRouter>
     </ChakraProvider>
