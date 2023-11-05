@@ -29,7 +29,7 @@ const DisplayMathProblem = ({
         qNum: totalCount + 1,
         correct: checkerFn(x, operator, y, parseInt(answer)),
       };
-      const response = await fetch("http://localhost:5000/worksheet", {
+      const response = await fetch("http://localhost:5000/allProblems", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -46,7 +46,7 @@ const DisplayMathProblem = ({
 
   const getCompleted = async () => {
     try {
-      const response = await fetch("http://localhost:5000/worksheet");
+      const response = await fetch("http://localhost:5000/allProblems");
       const jsonData = await response.json();
 
       setCompleted(jsonData);
