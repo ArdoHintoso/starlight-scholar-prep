@@ -66,7 +66,6 @@ const HomePage = () => {
           <TableCaption> __________&apos;s Past Worksheets</TableCaption>
           <Thead>
             <Tr>
-              <Th>Worksheet #</Th>
               <Th>Date, Time, and Region</Th>
               <Th>Status</Th>
               <Th>Accuracy</Th>
